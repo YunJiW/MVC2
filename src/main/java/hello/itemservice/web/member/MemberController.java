@@ -1,5 +1,6 @@
 package hello.itemservice.web.member;
 
+import hello.itemservice.domain.member.Member;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
