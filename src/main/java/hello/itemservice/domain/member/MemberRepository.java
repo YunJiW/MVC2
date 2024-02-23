@@ -1,4 +1,4 @@
-package hello.itemservice.web.member;
+package hello.itemservice.domain.member;
 
 
 import hello.itemservice.domain.member.Member;
