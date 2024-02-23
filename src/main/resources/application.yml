@@ -1,0 +1,7 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+
+  messages:
+   basename: messages, errors
