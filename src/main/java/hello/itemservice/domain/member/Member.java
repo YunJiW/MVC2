@@ -1,4 +1,4 @@
-package hello.itemservice.web.member;
+package hello.itemservice.domain.member;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;

@@ -1,6 +1,7 @@
-package hello.itemservice.web.member;
+package hello.itemservice.domain.member;
 
 
+import hello.itemservice.domain.member.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,7 @@ import java.util.*;
 public class MemberRepository {
 
     //동시성 고려안했음.
-    private static Map<Long,Member> store = new HashMap<>();
+    private static Map<Long, Member> store = new HashMap<>();
 
     private static long sequence = 0L;
 
