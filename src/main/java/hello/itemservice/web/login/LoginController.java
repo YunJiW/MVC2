@@ -41,7 +41,7 @@ public class LoginController {
         }
 
         //쿠키에 시간정보가 없으면 세션 쿠키
-        Cookie idcookie = new Cookie("memberId", String.valueOf(loginMember.getLoginId()));
+        Cookie idcookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
         response.addCookie(idcookie);
 
         //로그인 성공 처리
