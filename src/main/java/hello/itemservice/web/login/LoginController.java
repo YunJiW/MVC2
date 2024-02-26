@@ -2,6 +2,8 @@ package hello.itemservice.web.login;
 
 import hello.itemservice.domain.login.LoginService;
 import hello.itemservice.domain.member.Member;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +26,8 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute("loginForm")LoginForm loginForm, BindingResult bindingResult){
+    public String login(@Valid @ModelAttribute("loginForm")LoginForm loginForm, BindingResult bindingResult,
+                        HttpServletResponse response){
 
         if(bindingResult.hasErrors()){
             return "login/loginForm";
@@ -37,8 +40,11 @@ public class LoginController {
             return "login/loginForm";
         }
 
-        //로그인 성공 처리
+        //쿠키에 시간정보가 없으면 세션 쿠키
+        Cookie idcookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
+        response.addCookie(idcookie);
 
+        //로그인 성공 처리
         return "redirect:/";
     }
 
