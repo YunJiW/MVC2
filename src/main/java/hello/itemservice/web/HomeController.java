@@ -7,6 +7,7 @@ import hello.itemservice.web.session.SessionManager;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -48,7 +49,7 @@ public class HomeController {
 
     }
 
-    @GetMapping("/")
+//    @GetMapping("/")
     public String homeLoginV2(HttpServletRequest request, Model model){
 
 
@@ -64,6 +65,24 @@ public class HomeController {
         return "loginHome";
 
     }
+
+    @GetMapping("/")
+    public String homeLoginV3(HttpServletRequest request, Model model){
+
+
+        HttpSession session = request.getSession(false);
+        if(session == null){
+            return "home";
+        }
+
+        Member loginMember = (Member)session.getAttribute(SessionConst.LOGIN_MEMBER);
+
+        model.addAttribute("member",loginMember);
+
+        //로그인 된 사용자 전용 홈
+        return "loginHome";
+    }
+
 
 
 }
