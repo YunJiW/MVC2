@@ -3,7 +3,9 @@ package hello.itemservice.web;
 
 import hello.itemservice.domain.member.Member;
 import hello.itemservice.domain.member.MemberRepository;
+import hello.itemservice.web.session.SessionManager;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +23,14 @@ import java.util.Optional;
 public class HomeController {
 
     private final MemberRepository memberRepository;
+    private final SessionManager manager;
 
 //    @GetMapping("/")
     public String home(){
         return "home";
     }
 
-    @GetMapping("/")
+//    @GetMapping("/")
     public String homeLogin(@CookieValue(name="memberId",required = false)Long memberId, Model model){
         if(memberId == null){
             return "home";
@@ -45,17 +48,22 @@ public class HomeController {
 
     }
 
+    @GetMapping("/")
+    public String homeLoginV2(HttpServletRequest request, Model model){
 
-    @PostMapping("/logout")
-    public String logout(HttpServletResponse response){
-        expireCookie(response,"memberId");
 
-        return "redirect:/";
+        Member member = (Member)manager.getSession(request);
+        if(member == null){
+            return "home";
+        }
+
+
+        model.addAttribute("member",member);
+
+        //로그인 된 사용자 전용 홈
+        return "loginHome";
+
     }
 
-    private static void expireCookie(HttpServletResponse response,String cookieName) {
-        Cookie cookie = new Cookie(cookieName, null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-    }
+
 }
