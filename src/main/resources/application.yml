@@ -9,4 +9,6 @@ spring:
 server:
   servlet:
     session:
+      timeout: 60
       tracking-modes: cookie
+
