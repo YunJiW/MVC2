@@ -16,8 +16,7 @@ public class LoginCheckFilter implements Filter {
 
     //인증 필터 적용시에도 무관하게 들어갈수있는곳들
     private static final String[] whitelist = {
-            "/", "/member/add", "/login", "/logout", "/css/*"
-    };
+            "/", "/member/add", "/login", "/logout", "/css/*"};
 
 
     @Override
